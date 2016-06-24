@@ -27,31 +27,74 @@ public class Recaptcha extends AbstractJavaScriptComponent
 {
     private static final String DEFAULT_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
-    private String secretKey = "";
+    private String secretKey;
+    private String verifyURL;
     private String response = "";
-    private String verifyURL = DEFAULT_VERIFY_URL;
 
     /**
-     * Constructs a new {@link Recaptcha}.
+     * Constructs a new, empty {@link Recaptcha} with the default verify URL.
      */
     public Recaptcha()
     {
+        this("", "");
+    }
+
+    /**
+     * Constructs a new {@link Recaptcha} with the given site key and secret key
+     * using the default verify URL.
+     *
+     * @param siteKey The public key to use.
+     * @param secretKey The secret key to use.
+     */
+    public Recaptcha(String siteKey, String secretKey)
+    {
+        this(siteKey, secretKey, DEFAULT_VERIFY_URL);
+    }
+
+    /**
+     * Constructs a new {@link Recaptcha} with the given site key, secret key
+     * and verify URL.
+     *
+     * @param siteKey The public key to use.
+     * @param secretKey The secret key to use.
+     * @param verifyURL The URL to use when verifying the reCAPTCHA.
+     */
+    public Recaptcha(String siteKey, String secretKey, String verifyURL)
+    {
+        setSiteKey(siteKey);
+        setSecretKey(secretKey);
+        setVerifyURL(verifyURL);
         addFunction("setResponse", arguments ->
         {
             response = arguments.asString();
         });
     }
 
+    /**
+     * Sets the public key.
+     *
+     * @param siteKey The public key to use.
+     */
     public void setSiteKey(String siteKey)
     {
         getState().siteKey = siteKey;
     }
 
+    /**
+     * Sets the secret key.
+     *
+     * @param secretKey The secret key to use.
+     */
     public void setSecretKey(String secretKey)
     {
         this.secretKey = secretKey;
     }
 
+    /**
+     * Sets the URL to use when verifying the reCAPTCHA.
+     *
+     * @param verifyURL The URL to use when verifying the reCAPTCHA.
+     */
     public void setVerifyURL(String verifyURL)
     {
         this.verifyURL = verifyURL;
