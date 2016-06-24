@@ -17,6 +17,7 @@
 window.com_antonjohansson_vaadin_recaptcha_Recaptcha = function()
 {
     var connector = this;
+    var widgetId = -1;
 
     this.onStateChange = function()
     {
@@ -26,11 +27,16 @@ window.com_antonjohansson_vaadin_recaptcha_Recaptcha = function()
             'callback': this.responseCallback
         }
 
-        grecaptcha.render(connector.getElement(), parameters);
+        widgetId = grecaptcha.render(connector.getElement(), parameters);
     };
 
     this.responseCallback = function(response)
     {
         connector.setResponse(response);
+    }
+
+    this.reset = function()
+    {
+        grecaptcha.reset(widgetId);
     }
 };

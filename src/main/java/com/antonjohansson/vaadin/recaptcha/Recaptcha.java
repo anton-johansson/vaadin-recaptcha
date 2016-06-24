@@ -22,7 +22,7 @@ import com.vaadin.ui.AbstractJavaScriptComponent;
 /**
  * A Google reCAPTCHA v2 component.
  */
-@JavaScript({"https://www.google.com/recaptcha/api.js", "recaptcha-connector.js"})
+@JavaScript("recaptcha-connector.js")
 public class Recaptcha extends AbstractJavaScriptComponent
 {
     private static final String DEFAULT_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
@@ -61,6 +61,15 @@ public class Recaptcha extends AbstractJavaScriptComponent
     protected RecaptchaState getState()
     {
         return (RecaptchaState) super.getState();
+    }
+
+    /**
+     * Resets the reCAPTCHA.
+     */
+    public void reset()
+    {
+        response = "";
+        callFunction("reset");
     }
 
     /**
