@@ -22,12 +22,12 @@ import com.vaadin.ui.AbstractJavaScriptComponent;
 /**
  * A Google reCAPTCHA v2 component.
  */
-@JavaScript({"recaptcha-connector.js", "https://www.google.com/recaptcha/api.js"})
+@JavaScript({"https://www.google.com/recaptcha/api.js", "recaptcha-connector.js"})
 public class Recaptcha extends AbstractJavaScriptComponent
 {
     private static final String DEFAULT_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
-    private String secretKey;
+    private String secretKey = "";
     private String response = "";
     private String verifyURL = DEFAULT_VERIFY_URL;
 
@@ -36,7 +36,7 @@ public class Recaptcha extends AbstractJavaScriptComponent
      */
     public Recaptcha()
     {
-        addFunction("setRecaptchaResponse", arguments ->
+        addFunction("setResponse", arguments ->
         {
             response = arguments.asString();
         });

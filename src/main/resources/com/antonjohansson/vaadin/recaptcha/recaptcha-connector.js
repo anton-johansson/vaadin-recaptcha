@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var activeVaadinRecaptcha = {};
 
 window.com_antonjohansson_vaadin_recaptcha_Recaptcha = function()
 {
     var connector = this;
-    var element = connector.getElement();
-    activeVaadinRecaptcha = connector;
 
     this.onStateChange = function()
     {
-        var siteKey = connector.getState().siteKey;
-        element.innerHTML = '<div class="g-recaptcha" data-sitekey="' + siteKey + '" data-callback="vaadinRecaptchaCallback"></div>';
-    };
-};
+        var parameters =
+        {
+            'sitekey': connector.getState().siteKey,
+            'callback': this.responseCallback
+        }
 
-function vaadinRecaptchaCallback(response)
-{
-    activeVaadinRecaptcha.setRecaptchaResponse(response);
-}
+        grecaptcha.render(connector.getElement(), parameters);
+    };
+
+    this.responseCallback = function(response)
+    {
+        connector.setResponse(response);
+    }
+};
