@@ -13,17 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.antonjohansson.vaadin.recaptcha.shared;
-
-import com.vaadin.shared.ui.JavaScriptComponentState;
+package com.antonjohansson.vaadin.recaptcha.options;
 
 /**
- * Holds state for the component.
+ * Defines various sizes of a reCAPTCHA.
  */
-public class RecaptchaState extends JavaScriptComponentState
+public enum RecaptchaSize
 {
-    //CSOFF
-    public String siteKey = "";
-    public String size = "";
-    //CSON
+    /** The regular size of a reCAPTCHA. */
+    NORMAL("normal"),
+
+    /** A more compact size of a reCAPTCHA. */
+    COMPACT("compact");
+
+    private final String value;
+
+    RecaptchaSize(String value)
+    {
+        this.value = value;
+    }
+
+    /**
+     * Gets the size value used in the JavaScript API.
+     *
+     * @return Returns the size value.
+     */
+    public String getValue()
+    {
+        return value;
+    }
 }

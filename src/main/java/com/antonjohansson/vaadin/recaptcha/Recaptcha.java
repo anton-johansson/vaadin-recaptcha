@@ -15,6 +15,9 @@
  */
 package com.antonjohansson.vaadin.recaptcha;
 
+import static java.util.Objects.requireNonNull;
+
+import com.antonjohansson.vaadin.recaptcha.options.RecaptchaSize;
 import com.antonjohansson.vaadin.recaptcha.shared.RecaptchaState;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.ui.AbstractJavaScriptComponent;
@@ -98,6 +101,22 @@ public class Recaptcha extends AbstractJavaScriptComponent
     public void setVerifyURL(String verifyURL)
     {
         this.verifyURL = verifyURL;
+    }
+
+    /**
+     * Sets the size of the reCAPTCHA.
+     * <p>
+     * If not excplicitly set, it will fall back to <a href=
+     * "https://developers.google.com/recaptcha/docs/display#render_param">
+     * Googles default</a>.
+     * </p>
+     *
+     * @param size The size to use.
+     */
+    public void setSize(RecaptchaSize size)
+    {
+        requireNonNull(size, "size cannot be null");
+        getState().size = size.getValue();
     }
 
     @Override
