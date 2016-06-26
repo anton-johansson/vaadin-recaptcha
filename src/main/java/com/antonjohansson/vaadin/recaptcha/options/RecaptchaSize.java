@@ -34,9 +34,9 @@ public enum RecaptchaSize
     }
 
     /**
-     * Gets the size value used in the JavaScript API.
+     * Gets the {@code size} value used in the JavaScript API.
      *
-     * @return Returns the size value.
+     * @return Returns the {@code size} value.
      */
     public String getValue()
     {

@@ -13,18 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.antonjohansson.vaadin.recaptcha.shared;
-
-import com.vaadin.shared.ui.JavaScriptComponentState;
+package com.antonjohansson.vaadin.recaptcha.options;
 
 /**
- * Holds state for the component.
+ * Defines various themes of a reCAPTCHA.
  */
-public class RecaptchaState extends JavaScriptComponentState
+public enum RecaptchaTheme
 {
-    //CSOFF
-    public String siteKey = "";
-    public String size = "";
-    public String theme = "";
-    //CSON
+    /** A darker theme of a reCAPTCHA. */
+    DARK("dark"),
+
+    /** A lighter theme of a reCAPTCHA. */
+    LIGHT("light");
+
+    private final String value;
+
+    RecaptchaTheme(String value)
+    {
+        this.value = value;
+    }
+
+    /**
+     * Gets the {@code theme} value used in the JavaScript API.
+     *
+     * @return Returns the {@code theme} value.
+     */
+    public String getValue()
+    {
+        return value;
+    }
 }

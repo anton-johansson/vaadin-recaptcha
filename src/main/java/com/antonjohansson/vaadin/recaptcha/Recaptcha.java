@@ -23,6 +23,7 @@ import java.util.Optional;
 
 import com.antonjohansson.vaadin.recaptcha.listeners.CheckPassedListener;
 import com.antonjohansson.vaadin.recaptcha.options.RecaptchaSize;
+import com.antonjohansson.vaadin.recaptcha.options.RecaptchaTheme;
 import com.antonjohansson.vaadin.recaptcha.shared.RecaptchaState;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.server.VaadinService;
@@ -87,7 +88,7 @@ public class Recaptcha extends AbstractJavaScriptComponent
      */
     public void setSiteKey(String siteKey)
     {
-        getState().siteKey = siteKey;
+        getState().siteKey = requireNonNull(siteKey, "siteKey cannot be null");
     }
 
     /**
@@ -97,7 +98,7 @@ public class Recaptcha extends AbstractJavaScriptComponent
      */
     public void setSecretKey(String secretKey)
     {
-        this.secretKey = secretKey;
+        this.secretKey = requireNonNull(secretKey, "secretKey cannot be null");
     }
 
     /**
@@ -107,13 +108,13 @@ public class Recaptcha extends AbstractJavaScriptComponent
      */
     public void setVerifyURL(String verifyURL)
     {
-        this.verifyURL = verifyURL;
+        this.verifyURL = requireNonNull(verifyURL, "verifyURL cannot be null");
     }
 
     /**
      * Sets the size of the reCAPTCHA.
      * <p>
-     * If not excplicitly set, it will fall back to <a href=
+     * If not explicitly set, it will fall back to <a href=
      * "https://developers.google.com/recaptcha/docs/display#render_param">
      * Googles default</a>.
      * </p>
@@ -122,8 +123,22 @@ public class Recaptcha extends AbstractJavaScriptComponent
      */
     public void setSize(RecaptchaSize size)
     {
-        requireNonNull(size, "size cannot be null");
-        getState().size = size.getValue();
+        getState().size = requireNonNull(size.getValue(), "size cannot be null");
+    }
+
+    /**
+     * Sets the theme of the reCAPTCHA.
+     * <p>
+     * If not explicitly set, it will fall back to <a href=
+     * "https://developers.google.com/recaptcha/docs/display#render_param">
+     * Googles default</a>.
+     * </p>
+     *
+     * @param theme The theme to use.
+     */
+    public void setTheme(RecaptchaTheme theme)
+    {
+        getState().theme = requireNonNull(theme.getValue(), "theme cannot be null");
     }
 
     /**
