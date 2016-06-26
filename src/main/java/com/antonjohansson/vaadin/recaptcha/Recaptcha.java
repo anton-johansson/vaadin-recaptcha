@@ -20,6 +20,7 @@ import static java.util.Objects.requireNonNull;
 import com.antonjohansson.vaadin.recaptcha.options.RecaptchaSize;
 import com.antonjohansson.vaadin.recaptcha.shared.RecaptchaState;
 import com.vaadin.annotations.JavaScript;
+import com.vaadin.server.VaadinService;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 
 /**
@@ -135,13 +136,32 @@ public class Recaptcha extends AbstractJavaScriptComponent
     }
 
     /**
-     * Gets whether or not this request is verified.
+     * Gets whether or not this request is verified, <b>checking</b> the remote
+     * address of the request.
      *
      * @return Returns {@code true} if this request is verified.
      */
     public boolean isVerified()
     {
-        RecaptchaVerifier verifier = new RecaptchaVerifier(secretKey, response, verifyURL);
+        return isVerified(true);
+    }
+
+    /**
+     * Gets whether or not this request is verified.
+     *
+     * @param checkRemoteAddress Whether or not to check the remote address of
+     *            the request.
+     * @return Returns {@code true} if this request is verified.
+     */
+    public boolean isVerified(boolean checkRemoteAddress)
+    {
+        String remoteAddress = getRemoteAddress(checkRemoteAddress);
+        RecaptchaVerifier verifier = new RecaptchaVerifier(secretKey, response, verifyURL, remoteAddress);
         return verifier.isVerified();
+    }
+
+    private String getRemoteAddress(boolean checkRemoteAddress)
+    {
+        return checkRemoteAddress ? VaadinService.getCurrentRequest().getRemoteAddr() : "";
     }
 }

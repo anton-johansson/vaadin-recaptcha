@@ -16,11 +16,13 @@
 package com.antonjohansson.vaadin.recaptcha;
 
 import static java.net.URLEncoder.encode;
+import static java.util.Objects.requireNonNull;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -32,6 +34,7 @@ class RecaptchaVerifier
     private final String secretKey;
     private final String response;
     private final String verifyURL;
+    private final String remoteAddress;
 
     /**
      * Constructs a new {@link RecaptchaVerifier}.
@@ -42,9 +45,23 @@ class RecaptchaVerifier
      */
     RecaptchaVerifier(String secretKey, String response, String verifyURL)
     {
-        this.secretKey = secretKey;
-        this.response = response;
-        this.verifyURL = verifyURL;
+        this(secretKey, response, verifyURL, "");
+    }
+
+    /**
+     * Constructs a new {@link RecaptchaVerifier}.
+     *
+     * @param secretKey The secret key to use when verifying.
+     * @param response The received response to verify.
+     * @param verifyURL The URL to use when verifying.
+     * @param remoteAddress The remote address of the request to verify.
+     */
+    RecaptchaVerifier(String secretKey, String response, String verifyURL, String remoteAddress)
+    {
+        this.secretKey = requireNonNull(secretKey);
+        this.response = requireNonNull(response);
+        this.verifyURL = requireNonNull(verifyURL);
+        this.remoteAddress = requireNonNull(remoteAddress);
     }
 
     /**
@@ -63,12 +80,7 @@ class RecaptchaVerifier
         HttpURLConnection connection = null;
         try
         {
-            String parameters = new StringBuilder()
-                    .append("secret=")
-                    .append(encode(secretKey, "UTF-8"))
-                    .append("&response=")
-                    .append(encode(response, "UTF-8"))
-                    .toString();
+            String parameters = getParameters();
 
             URL url = new URL(verifyURL);
             connection = (HttpURLConnection) url.openConnection();
@@ -107,5 +119,23 @@ class RecaptchaVerifier
                 connection.disconnect();
             }
         }
+    }
+
+    private String getParameters() throws UnsupportedEncodingException
+    {
+        StringBuilder parameters = new StringBuilder()
+                .append("secret=")
+                .append(encode(secretKey, "UTF-8"))
+                .append("&response=")
+                .append(encode(response, "UTF-8"));
+
+        if (remoteAddress.length() > 0)
+        {
+            parameters
+                    .append("&remoteip=")
+                    .append(encode(remoteAddress, "UTF-8"));
+        }
+
+        return parameters.toString();
     }
 }
