@@ -17,6 +17,11 @@ package com.antonjohansson.vaadin.recaptcha;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+
+import com.antonjohansson.vaadin.recaptcha.listeners.CheckPassedListener;
 import com.antonjohansson.vaadin.recaptcha.options.RecaptchaSize;
 import com.antonjohansson.vaadin.recaptcha.shared.RecaptchaState;
 import com.vaadin.annotations.JavaScript;
@@ -31,9 +36,10 @@ public class Recaptcha extends AbstractJavaScriptComponent
 {
     private static final String DEFAULT_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
+    private final Collection<CheckPassedListener> checkPassedListeners = new ArrayList<>();
     private String secretKey;
     private String verifyURL;
-    private String response = "";
+    private Optional<Boolean> verified = Optional.empty();
 
     /**
      * Constructs a new, empty {@link Recaptcha} with the default verify URL.
@@ -70,7 +76,7 @@ public class Recaptcha extends AbstractJavaScriptComponent
         setVerifyURL(verifyURL);
         addFunction("setResponse", arguments ->
         {
-            response = arguments.asString();
+            checkResponse(arguments.asString());
         });
     }
 
@@ -120,10 +126,48 @@ public class Recaptcha extends AbstractJavaScriptComponent
         getState().size = size.getValue();
     }
 
+    /**
+     * Adds a check passed listener.
+     *
+     * @param listener The listener to add.
+     */
+    public void addCheckPassedListener(CheckPassedListener listener)
+    {
+        this.checkPassedListeners.add(listener);
+    }
+
+    /**
+     * Removes a check passed listener.
+     *
+     * @param listener The listener to remove.
+     */
+    public void removeCheckPassedListener(CheckPassedListener listener)
+    {
+        this.checkPassedListeners.remove(listener);
+    }
+
     @Override
     protected RecaptchaState getState()
     {
         return (RecaptchaState) super.getState();
+    }
+
+    private void checkResponse(String response)
+    {
+        if (verified.isPresent())
+        {
+            throw new IllegalStateException("The response is already checked");
+        }
+
+        String remoteAddress = VaadinService.getCurrentRequest().getRemoteAddr();
+        RecaptchaVerifier verifier = new RecaptchaVerifier(secretKey, response, verifyURL, remoteAddress);
+        boolean verified = verifier.isVerified();
+        this.verified = Optional.of(verified);
+
+        if (verified)
+        {
+            checkPassedListeners.forEach(CheckPassedListener::onCheckPassed);
+        }
     }
 
     /**
@@ -131,37 +175,17 @@ public class Recaptcha extends AbstractJavaScriptComponent
      */
     public void reset()
     {
-        response = "";
+        verified = Optional.empty();
         callFunction("reset");
-    }
-
-    /**
-     * Gets whether or not this request is verified, <b>checking</b> the remote
-     * address of the request.
-     *
-     * @return Returns {@code true} if this request is verified.
-     */
-    public boolean isVerified()
-    {
-        return isVerified(true);
     }
 
     /**
      * Gets whether or not this request is verified.
      *
-     * @param checkRemoteAddress Whether or not to check the remote address of
-     *            the request.
      * @return Returns {@code true} if this request is verified.
      */
-    public boolean isVerified(boolean checkRemoteAddress)
+    public boolean isVerified()
     {
-        String remoteAddress = getRemoteAddress(checkRemoteAddress);
-        RecaptchaVerifier verifier = new RecaptchaVerifier(secretKey, response, verifyURL, remoteAddress);
-        return verifier.isVerified();
-    }
-
-    private String getRemoteAddress(boolean checkRemoteAddress)
-    {
-        return checkRemoteAddress ? VaadinService.getCurrentRequest().getRemoteAddr() : "";
+        return verified.orElse(false);
     }
 }
