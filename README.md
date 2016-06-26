@@ -26,7 +26,7 @@ Provides a simple Google reCAPTCHA v2 component for Vaadin. See https://develope
     
 4. Validate the user input:
 	```java
-	if (!captcha.isValid())
+	if (!captcha.isVerified())
 	{
 	    ...
 	}
