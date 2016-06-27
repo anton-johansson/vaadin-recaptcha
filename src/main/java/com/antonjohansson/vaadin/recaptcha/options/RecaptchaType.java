@@ -13,19 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.antonjohansson.vaadin.recaptcha.shared;
-
-import com.vaadin.shared.ui.JavaScriptComponentState;
+package com.antonjohansson.vaadin.recaptcha.options;
 
 /**
- * Holds state for the component.
+ * Defines various types of a reCAPTCHA.
  */
-public class RecaptchaState extends JavaScriptComponentState
+public enum RecaptchaType
 {
-    //CSOFF
-    public String siteKey = "";
-    public String size = "";
-    public String theme = "";
-    public String type = "";
-    //CSON
+    /** Verify using an audio-clip. */
+    AUDIO("audio"),
+
+    /** Verify using a set of images. */
+    IMAGE("image");
+
+    private final String value;
+
+    RecaptchaType(String value)
+    {
+        this.value = value;
+    }
+
+    /**
+     * Gets the {@code type} value used in the JavaScript API.
+     *
+     * @return Returns the {@code type} value.
+     */
+    public String getValue()
+    {
+        return value;
+    }
 }

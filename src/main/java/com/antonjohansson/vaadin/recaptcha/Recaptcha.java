@@ -24,6 +24,7 @@ import java.util.Optional;
 import com.antonjohansson.vaadin.recaptcha.listeners.CheckPassedListener;
 import com.antonjohansson.vaadin.recaptcha.options.RecaptchaSize;
 import com.antonjohansson.vaadin.recaptcha.options.RecaptchaTheme;
+import com.antonjohansson.vaadin.recaptcha.options.RecaptchaType;
 import com.antonjohansson.vaadin.recaptcha.shared.RecaptchaState;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.server.VaadinService;
@@ -139,6 +140,21 @@ public class Recaptcha extends AbstractJavaScriptComponent
     public void setTheme(RecaptchaTheme theme)
     {
         getState().theme = requireNonNull(theme.getValue(), "theme cannot be null");
+    }
+
+    /**
+     * Sets the type of the reCAPTCHA.
+     * <p>
+     * If not explicitly set, it will fall back to <a href=
+     * "https://developers.google.com/recaptcha/docs/display#render_param">
+     * Googles default</a>.
+     * </p>
+     *
+     * @param type The type to use.
+     */
+    public void setType(RecaptchaType type)
+    {
+        getState().type = requireNonNull(type.getValue(), "type cannot be null");
     }
 
     /**

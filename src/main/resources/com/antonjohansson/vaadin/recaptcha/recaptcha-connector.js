@@ -19,6 +19,14 @@ window.com_antonjohansson_vaadin_recaptcha_Recaptcha = function()
     var connector = this;
     var widgetId = -1;
 
+    var addOption = function(parameters, option)
+    {
+        if (connector.getState()[option])
+        {
+            parameters[option] = connector.getState()[option];
+        }
+    }
+
     this.onStateChange = function()
     {
         var parameters =
@@ -27,15 +35,9 @@ window.com_antonjohansson_vaadin_recaptcha_Recaptcha = function()
             'callback': this.responseCallback
         }
 
-        if (connector.getState().size)
-        {
-            parameters['size'] = connector.getState().size;
-        }
-
-        if (connector.getState().theme)
-        {
-            parameters['theme'] = connector.getState().theme;
-        }
+        addOption(parameters, 'size');
+        addOption(parameters, 'theme');
+        addOption(parameters, 'type');
 
         widgetId = grecaptcha.render(connector.getElement(), parameters);
     };
