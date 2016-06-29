@@ -21,7 +21,7 @@
     <parent>
         <groupId>com.viskan</groupId>
         <artifactId>parent</artifactId>
-        <version>2</version>
+        <version>3</version>
     </parent>
     <groupId>com.antonjohansson</groupId>
     <artifactId>vaadin-recaptcha</artifactId>
