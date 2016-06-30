@@ -28,6 +28,10 @@
     <version>2.0.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <name>Anton Johansson :: Google reCAPTCHA Widget for Vaadin</name>
+    <description>Provides a simple Google reCAPTCHA v2 component for Vaadin.</description>
+    <url>https://github.com/anton-johansson/vaadin-recaptcha</url>
+
+    <organization />
 
     <developers>
         <developer>
