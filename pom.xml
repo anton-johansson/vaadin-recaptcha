@@ -26,6 +26,7 @@
     <groupId>com.anton-johansson</groupId>
     <artifactId>vaadin-recaptcha</artifactId>
     <version>2.0.0-SNAPSHOT</version>
+    <packaging>bundle</packaging>
     <name>Anton Johansson :: Google reCAPTCHA Widget for Vaadin</name>
 
     <properties>
