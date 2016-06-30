@@ -27,5 +27,6 @@ public class RecaptchaState extends JavaScriptComponentState
     public String size = "";
     public String theme = "";
     public String type = "";
+    public int tabindex;
     //CSON
 }

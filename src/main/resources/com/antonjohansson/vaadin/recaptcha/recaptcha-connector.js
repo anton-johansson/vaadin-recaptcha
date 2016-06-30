@@ -39,6 +39,7 @@ window.com_antonjohansson_vaadin_recaptcha_Recaptcha = function()
         addOption(parameters, 'size');
         addOption(parameters, 'theme');
         addOption(parameters, 'type');
+        addOption(parameters, 'tabindex');
 
         widgetId = grecaptcha.render(connector.getElement(), parameters);
     };
