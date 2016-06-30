@@ -29,11 +29,40 @@
     <packaging>bundle</packaging>
     <name>Anton Johansson :: Google reCAPTCHA Widget for Vaadin</name>
 
+    <developers>
+        <developer>
+            <id>anton-johansson</id>
+            <name>Anton Johansson</name>
+            <email>antoon.johansson@gmail.com</email>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <url>https://github.com/anton-johansson/vaadin-recaptcha/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <scm>
+        <url>https://github.com/anton-johansson/vaadin-recaptcha</url>
+        <connection>scm:git:git://github.com/anton-johansson/vaadin-recaptcha.git</connection>
+        <developerConnection>scm:git:git@github.com:anton-johansson/vaadin-recaptcha.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <properties>
         <!-- Build -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         
         <!-- Versions -->
         <vaadin.version>7.6.6</vaadin.version>
