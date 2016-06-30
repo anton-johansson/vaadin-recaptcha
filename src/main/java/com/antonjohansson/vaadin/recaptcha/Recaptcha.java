@@ -120,6 +120,14 @@ public class Recaptcha extends AbstractJavaScriptComponent
     }
 
     /**
+     * Sets the tab index of the reCAPTCHA.
+     */
+    public void setTabIndex(int tabIndex)
+    {
+        getState().tabindex = tabIndex;
+    }
+
+    /**
      * Sets the size of the reCAPTCHA.
      * <p>
      * If not explicitly set, it will fall back to <a href=
