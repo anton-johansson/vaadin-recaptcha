@@ -2,6 +2,8 @@
 
 Provides a simple Google reCAPTCHA v2 component for Vaadin. See https://developers.google.com/recaptcha/ for more information.
 
+[![Build Status](https://img.shields.io/travis/anton-johansson/vaadin-recaptcha/master.svg?style=flat-square)](https://travis-ci.org/anton-johansson/vaadin-recaptcha)
+[![License](https://img.shields.io/github/license/anton-johansson/vaadin-recaptcha.svg?style=flat-square)](../master/LICENSE)
 
 ## Usage
 
@@ -24,7 +26,14 @@ Provides a simple Google reCAPTCHA v2 component for Vaadin. See https://develope
 	layout.addComponent(captcha);
 	```
     
-4. Validate the user input:
+4. Optionally set extra properties on your component:
+	```java
+	captcha.setType(RecaptchaType.AUDIO);
+	captcha.setTheme(RecaptchaTheme.DARK);
+	captcha.setSize(RecaptchaSize.COMPACT);
+	```
+    
+5. Validate the user input:
 	```java
 	if (!captcha.isVerified())
 	{
