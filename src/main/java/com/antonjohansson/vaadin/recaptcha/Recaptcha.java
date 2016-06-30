@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import com.antonjohansson.vaadin.recaptcha.listeners.CheckPassedListener;
+import com.antonjohansson.vaadin.recaptcha.listeners.PassedCheckExpiredListener;
 import com.antonjohansson.vaadin.recaptcha.options.RecaptchaSize;
 import com.antonjohansson.vaadin.recaptcha.options.RecaptchaTheme;
 import com.antonjohansson.vaadin.recaptcha.options.RecaptchaType;
@@ -39,6 +40,7 @@ public class Recaptcha extends AbstractJavaScriptComponent
     private static final String DEFAULT_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
     private final Collection<CheckPassedListener> checkPassedListeners = new ArrayList<>();
+    private final Collection<PassedCheckExpiredListener> passedCheckExpiredListeners = new ArrayList<>();
     private String secretKey;
     private String verifyURL;
     private Optional<Boolean> verified = Optional.empty();
@@ -79,6 +81,11 @@ public class Recaptcha extends AbstractJavaScriptComponent
         addFunction("setResponse", arguments ->
         {
             checkResponse(arguments.asString());
+        });
+        addFunction("expired", arguments ->
+        {
+            verified = Optional.empty();
+            passedCheckExpiredListeners.forEach(PassedCheckExpiredListener::onPassedCheckExpired);
         });
     }
 
@@ -175,6 +182,26 @@ public class Recaptcha extends AbstractJavaScriptComponent
     public void removeCheckPassedListener(CheckPassedListener listener)
     {
         this.checkPassedListeners.remove(listener);
+    }
+
+    /**
+     * Adds a passed check expired listener.
+     *
+     * @param listener The listener to add.
+     */
+    public void addPassedCheckExpiredListener(PassedCheckExpiredListener listener)
+    {
+        this.passedCheckExpiredListeners.add(listener);
+    }
+
+    /**
+     * Removes a passed check expired listener.
+     *
+     * @param listener The listener to remove.
+     */
+    public void removePassedCheckExpiredListener(PassedCheckExpiredListener listener)
+    {
+        this.passedCheckExpiredListeners.remove(listener);
     }
 
     @Override

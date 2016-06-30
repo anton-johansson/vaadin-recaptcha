@@ -32,7 +32,8 @@ window.com_antonjohansson_vaadin_recaptcha_Recaptcha = function()
         var parameters =
         {
             'sitekey': connector.getState().siteKey,
-            'callback': this.responseCallback
+            'callback': this.responseCallback,
+            'expired-callback': this.expiredCallback
         }
 
         addOption(parameters, 'size');
@@ -45,6 +46,11 @@ window.com_antonjohansson_vaadin_recaptcha_Recaptcha = function()
     this.responseCallback = function(response)
     {
         connector.setResponse(response);
+    }
+
+    this.expiredCallback = function()
+    {
+        connector.expired();
     }
 
     this.reset = function()
