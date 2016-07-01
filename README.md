@@ -9,7 +9,17 @@ Provides a simple Google reCAPTCHA v2 component for Vaadin. See https://develope
 
 1. Generate your reCAPTCHA keys on http://www.google.com/recaptcha/intro/index.html
 
-2. Include the reCAPTCHA JavaScript in your UI:
+2. Include the artifact in your POM:
+	```xml
+	<dependency>
+		<groupId>com.anton-johansson<groupId>
+		<artifactId>vaadin-recaptcha</artifactId>
+		<version>2.0.0</version>
+	</dependency>
+	```
+
+
+3. Include the reCAPTCHA JavaScript in your UI:
 	```java
 	@JavaScript("https://www.google.com/recaptcha/api.js")
 	public class CustomUI extends UI
@@ -18,7 +28,7 @@ Provides a simple Google reCAPTCHA v2 component for Vaadin. See https://develope
 	}
 	```
     
-3. Add the ```Recaptcha```-component to your UI:
+4. Add the ```Recaptcha```-component to your UI:
 	```java
 	String siteKey = "...";
 	String secretKey = "...";
@@ -26,14 +36,14 @@ Provides a simple Google reCAPTCHA v2 component for Vaadin. See https://develope
 	layout.addComponent(captcha);
 	```
     
-4. Optionally set extra properties on your component:
+5. Optionally set extra properties on your component:
 	```java
 	captcha.setType(RecaptchaType.AUDIO);
 	captcha.setTheme(RecaptchaTheme.DARK);
 	captcha.setSize(RecaptchaSize.COMPACT);
 	```
     
-5. Validate the user input:
+6. Validate the user input:
 	```java
 	if (!captcha.isVerified())
 	{
