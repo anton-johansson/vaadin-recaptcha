@@ -4,6 +4,7 @@ Provides a simple Google reCAPTCHA v2 component for Vaadin. See https://develope
 
 [![Build Status](https://img.shields.io/travis/anton-johansson/vaadin-recaptcha/master.svg?style=flat-square)](https://travis-ci.org/anton-johansson/vaadin-recaptcha)
 [![License](https://img.shields.io/github/license/anton-johansson/vaadin-recaptcha.svg?style=flat-square)](../master/LICENSE)
+[![Version](https://img.shields.io/maven-central/v/com.anton-johansson/vaadin-recaptcha.svg?style=flat-square)](http://mvnrepository.com/artifact/com.anton-johansson/vaadin-recaptcha)
 
 ## Usage
 
