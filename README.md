@@ -1,10 +1,11 @@
 # Google reCAPTCHA 2 Component for Vaadin
 
-Provides a simple Google reCAPTCHA v2 component for Vaadin. See https://developers.google.com/recaptcha/ for more information.
+[![Build Status](https://img.shields.io/travis/anton-johansson/vaadin-recaptcha/master.svg)](https://travis-ci.org/anton-johansson/vaadin-recaptcha)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.anton-johansson/vaadin-recaptcha/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.anton-johansson/vaadin-recaptcha)
+[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.anton-johansson/vaadin-recaptcha/badge.svg)](http://www.javadoc.io/doc/com.anton-johansson/vaadin-recaptcha)
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)](https://raw.githubusercontent.com/anton-johansson/vaadin-recaptcha/master/LICENSE)
 
-[![Build Status](https://img.shields.io/travis/anton-johansson/vaadin-recaptcha/master.svg?style=flat-square)](https://travis-ci.org/anton-johansson/vaadin-recaptcha)
-[![License](https://img.shields.io/github/license/anton-johansson/vaadin-recaptcha.svg?style=flat-square)](../master/LICENSE)
-[![Version](https://img.shields.io/maven-central/v/com.anton-johansson/vaadin-recaptcha.svg?style=flat-square)](http://mvnrepository.com/artifact/com.anton-johansson/vaadin-recaptcha)
+Provides a simple Google reCAPTCHA v2 component for Vaadin. See https://developers.google.com/recaptcha/ for more information.
 
 ## Usage
 
