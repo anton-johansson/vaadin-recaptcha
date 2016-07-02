@@ -42,18 +42,6 @@ class RecaptchaVerifier
      * @param secretKey The secret key to use when verifying.
      * @param response The received response to verify.
      * @param verifyURL The URL to use when verifying.
-     */
-    RecaptchaVerifier(String secretKey, String response, String verifyURL)
-    {
-        this(secretKey, response, verifyURL, "");
-    }
-
-    /**
-     * Constructs a new {@link RecaptchaVerifier}.
-     *
-     * @param secretKey The secret key to use when verifying.
-     * @param response The received response to verify.
-     * @param verifyURL The URL to use when verifying.
      * @param remoteAddress The remote address of the request to verify.
      */
     RecaptchaVerifier(String secretKey, String response, String verifyURL, String remoteAddress)
@@ -123,19 +111,13 @@ class RecaptchaVerifier
 
     private String getParameters() throws UnsupportedEncodingException
     {
-        StringBuilder parameters = new StringBuilder()
+        return new StringBuilder()
                 .append("secret=")
                 .append(encode(secretKey, "UTF-8"))
                 .append("&response=")
-                .append(encode(response, "UTF-8"));
-
-        if (remoteAddress.length() > 0)
-        {
-            parameters
-                    .append("&remoteip=")
-                    .append(encode(remoteAddress, "UTF-8"));
-        }
-
-        return parameters.toString();
+                .append(encode(response, "UTF-8"))
+                .append("&remoteip=")
+                .append(encode(remoteAddress, "UTF-8"))
+                .toString();
     }
 }
