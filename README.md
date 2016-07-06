@@ -3,7 +3,7 @@
 [![Build Status](https://img.shields.io/travis/anton-johansson/vaadin-recaptcha/master.svg)](https://travis-ci.org/anton-johansson/vaadin-recaptcha)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.anton-johansson/vaadin-recaptcha/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.anton-johansson/vaadin-recaptcha)
 [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.anton-johansson/vaadin-recaptcha/badge.svg)](http://www.javadoc.io/doc/com.anton-johansson/vaadin-recaptcha)
-[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)](https://raw.githubusercontent.com/anton-johansson/vaadin-recaptcha/master/LICENSE)
+[![License](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)](https://raw.githubusercontent.com/anton-johansson/vaadin-recaptcha/master/LICENSE)
 
 Provides a simple Google reCAPTCHA v2 component for Vaadin. See https://developers.google.com/recaptcha/ for more information.
 
